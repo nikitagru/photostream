@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <div th:object="${user}">
+    <div>
+      <p th:text="'Your username is ' + *{username}"/>
+      <p th:text="'Your email is ' + *{email}"/>
+    </div>
+  </div>
+  <div>
+    <div th:each="post: ${posts}">
+      <div>
+        <img th:src="@{/img/{imagename}(imagename=${post.imagename})}"/>
+        <p th:text="${post.text}"/>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
