@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Proximanova-Regular";
+    src: url("../fonts/OpenSans-Regular-webfont.eot") format("eot"),
+           url("../fonts/OpenSans-Regular-webfont.woff") format("woff"),
+           url("../fonts/OpenSans-Regular-webfont.tff") format("ttf");
+   }
+body {
+    font-family: "Proximanova-Regular", sans-serif;
+    font-size: 16px;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    width: 1225px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.user-posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 100px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-image {
+    width: 300px;
+}
+
+.user-information {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    margin-left: 200px;
+}
+
+.user-image {
+    width: 200px;
+}
+
+.user-subs {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-about {
+    margin-right: 20px;
+}
