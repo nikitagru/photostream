@@ -25,6 +25,7 @@
         </div>
       </div>
     </div>
+    <hr>
     <div class="user-posts">
       <div th:each="post: ${posts}" class="post">
         <img th:src="@{/img/{imagename}(imagename=${post.imagename})}" class="post-image"/>
