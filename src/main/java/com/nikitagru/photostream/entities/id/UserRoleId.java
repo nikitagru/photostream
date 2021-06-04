@@ -1,4 +1,4 @@
-package com.nikitagru.photostream.entities;
+package com.nikitagru.photostream.entities.id;
 
 import java.io.Serializable;
 

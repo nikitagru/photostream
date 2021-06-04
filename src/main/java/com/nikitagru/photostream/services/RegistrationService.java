@@ -14,7 +14,7 @@ public class RegistrationService {
         this.usersRoleRepository = usersRoleRepository;
     }
 
-    public void saveAndSetRoleNewUser(long userId) {
+    public void saveAndSetRoleUser(long userId) {
         usersRoleRepository.saveNewUser(userId);
     }
 }

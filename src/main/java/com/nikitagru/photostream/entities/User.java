@@ -3,6 +3,7 @@ package com.nikitagru.photostream.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -30,4 +31,17 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Collection<Post> posts;
+
+    @ManyToMany
+    @JoinTable(name = "subscribers",
+            joinColumns = @JoinColumn(name = "subscriber_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> subscribers = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "subscribers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subscriber_id"))
+    private Collection<User> subscriptions = new ArrayList<>();
+
 }

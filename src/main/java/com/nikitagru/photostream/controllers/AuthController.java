@@ -10,22 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-public class MainController {
+public class AuthController {
     private UserService userService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("/")
-    public String homePage(Principal principal, Model model) {
-        if (principal == null) {
-            model.addAttribute("name", "non-auth-user");
-        } else {
-            model.addAttribute("name", principal.getName());
-        }
-        return "home";
     }
 
     @GetMapping("/authenticated")

@@ -3,7 +3,6 @@ package com.nikitagru.photostream.services;
 import com.nikitagru.photostream.entities.Role;
 import com.nikitagru.photostream.entities.User;
 import com.nikitagru.photostream.repositories.UserRepository;
-import com.nikitagru.photostream.repositories.UsersRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,7 +58,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         User createdUser = userRepository.findByUsername(user.getUsername());
-        registrationService.saveAndSetRoleNewUser(createdUser.getId());
+        registrationService.saveAndSetRoleUser(createdUser.getId());
     }
 
 }

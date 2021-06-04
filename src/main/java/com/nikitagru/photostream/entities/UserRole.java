@@ -1,13 +1,12 @@
 package com.nikitagru.photostream.entities;
 
-import jdk.jfr.Enabled;
+import com.nikitagru.photostream.entities.id.UserRoleId;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 @Entity
 @Data
