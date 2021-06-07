@@ -20,6 +20,8 @@ public class User {
 
     private String email;
 
+    private String profileImageName;
+
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

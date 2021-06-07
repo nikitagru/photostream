@@ -1,5 +1,15 @@
+@font-face {
+    font-family: "Proximanova-Regular";
+    src: url("../fonts/OpenSans-Regular-webfont.eot") format("eot"),
+           url("../fonts/OpenSans-Regular-webfont.woff") format("woff"),
+           url("../fonts/OpenSans-Regular-webfont.tff") format("ttf");
+   }
+
 body {
+    font-family: "Proximanova-Regular", sans-serif;
     width: 1225px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .user-posts {
@@ -21,4 +31,9 @@ body {
     height: 220px;
     width: auto;
     object-fit: cover;
+}
+
+.user-link {
+    text-decoration: none;
+    color: #363636;
 }

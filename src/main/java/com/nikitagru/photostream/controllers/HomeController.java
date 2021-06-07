@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 @Controller
 public class HomeController {
@@ -28,10 +30,10 @@ public class HomeController {
             model.addAttribute("name", "non-auth-user");
         } else {
             User user = userService.findByUsername(principal.getName());
-            Collection<Post> subscriptionsPosts = new ArrayList<>();
+            HashMap<User, Post> subscriptionsPosts = new HashMap<>();
             for (User subscription : user.getSubscriptions()) {
                 for (Post userPosts : subscription.getPosts()) {
-                    subscriptionsPosts.add(userPosts);
+                    subscriptionsPosts.put(subscription, userPosts);
                 }
             }
 
@@ -44,7 +46,13 @@ public class HomeController {
     @GetMapping("/userprofile")
     public String userProfile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        Collection<Post> posts = user.getPosts();
+
+        initializeUser(model, user);
+
+        return "userprofile";
+    }
+
+    private void initializeUser(Model model, User user) {
         int subscribers = user.getSubscribers().size();
         int subscriptions = user.getSubscriptions().size();
 
@@ -52,7 +60,17 @@ public class HomeController {
         model.addAttribute("posts", user.getPosts());
         model.addAttribute("subscribers", subscribers);
         model.addAttribute("subscriptions", subscriptions);
+    }
 
-        return "userprofile";
+    @GetMapping("/userprofile/{id}")
+    public String currentUserprofile(@PathVariable("id") Long id, Model model) {
+        User user = userService.findById(id);
+
+        if (user != null) {
+            initializeUser(model, user);
+            return "userprofile";
+        }
+
+        return "home";
     }
 }

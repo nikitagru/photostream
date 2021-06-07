@@ -11,11 +11,11 @@
   <div th:object="${user}" class="user">
     <div class="user-information">
       <div class="user-avatar">
-        <img src="/img/xPxnjkZ_Xmo.jpg" class="user-image"/>
+        <img th:src="@{/img/usersImage/{profileImage}(profileImage=${user.profileImageName})}" class="user-image"/>
       </div>
       <div class="user-subs">
         <div>
-          <p th:text="'Your username is ' + *{username}" class="user-about"/>
+          <p th:text="*{username}" class="user-about"/>
         </div>
         <div>
           <p th:text="${subscribers} + ' followers'" class="user-about"/>
@@ -28,7 +28,7 @@
     <hr>
     <div class="user-posts">
       <div th:each="post: ${posts}" class="post" id="post">
-        <img th:src="@{/img/{imagename}(imagename=${post.imagename})}" class="post-image" id="post-image"/>
+        <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename})}" class="post-image" id="post-image"/>
         <p th:text="${post.text}" class="post-text"/>
       </div>
     </div>

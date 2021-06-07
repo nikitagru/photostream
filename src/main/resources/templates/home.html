@@ -9,9 +9,12 @@
 
     <p th:text="'Hello, authenticated user ' + ${name} + '!'" />
     <div th:unless="${postsCount == '0'}">
-        <div th:each="post: ${posts}" class="post" id="post">
-            <img th:src="@{/img/{imagename}(imagename=${post.imagename})}" class="post-image" id="post-image"/>
-            <p th:text="${post.text}" class="post-text"/>
+        <div th:each="key: ${posts.keySet()}" class="post" id="post">
+            <div><a th:href="@{/userprofile/{id}(id=${key.id})}" class="user-link">
+                <p th:text="${key.username}"/>
+            </a></div>
+            <img th:src="@{/img/usersImage/{imagename}(imagename=${posts.get(key).imagename})}" class="post-image" id="post-image"/>
+            <p th:text="${posts.get(key).text}" class="post-text"/>
         </div>
     </div>
 </body>
