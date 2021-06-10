@@ -25,12 +25,17 @@ body {
     border: 2px solid #cfcfcf;
     border-radius: 10px;
     padding: 10px;
+    margin-bottom: 30px;
 }
 
 .post-image {
     height: 220px;
     width: auto;
     object-fit: cover;
+}
+
+.post-image__modal {
+    max-width: 100%;
 }
 
 .user-link {

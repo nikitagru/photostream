@@ -3,19 +3,72 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link th:href="@{/css/home.css}" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <!-- Header -->
+        <nav class="navbar navbar-light justify-content-end" style="background-color: #e3f2fd;">
+            <div th:if="${posts == null}">
+                <ul class="navbar-nav me-2 d-flex flex-row">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" th:href="@{/registration}">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${posts != null}">
+                <ul class="navbar-nav me-2 d-flex flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Header -->
 
-    <p th:text="'Hello, authenticated user ' + ${name} + '!'" />
-    <div th:unless="${postsCount == '0'}">
-        <div th:each="key: ${posts.keySet()}" class="post" id="post">
-            <div><a th:href="@{/userprofile/{id}(id=${key.id})}" class="user-link">
-                <p th:text="${key.username}"/>
-            </a></div>
-            <img th:src="@{/img/usersImage/{imagename}(imagename=${posts.get(key).imagename})}" class="post-image" id="post-image"/>
-            <p th:text="${posts.get(key).text}" class="post-text"/>
+        <p th:text="'Hello, authenticated user ' + ${name} + '!'" />
+        <!-- Posts -->
+        <div th:unless="${postsCount == '0'}" th:if="${posts != null}">
+            <div th:each="key: ${posts.keySet()}" id="post">
+                <div th:each="value: ${posts.get(key)}" class="post">
+                    <div><a th:href="@{/userprofile/{id}(id=${key.id})}" class="user-link">
+                        <p th:text="${key.username}"/>
+                    </a></div>
+                    <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename})}" class="post-image"/>
+                    <p th:text="${value.text}" class="post-text"/>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#modalPost' + ${value.cutImageName}">
+                        Fullscreen
+                    </button>
+                    <div class="modal fade" th:id="'modalPost' + ${value.cutImageName}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename})}" class="post-image__modal"/>
+                                        <p th:text="${value.text}" class="post-text"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- /Posts -->
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -30,11 +31,13 @@ public class HomeController {
             model.addAttribute("name", "non-auth-user");
         } else {
             User user = userService.findByUsername(principal.getName());
-            HashMap<User, Post> subscriptionsPosts = new HashMap<>();
+            HashMap<User, List<Post>> subscriptionsPosts = new HashMap<>();
             for (User subscription : user.getSubscriptions()) {
-                for (Post userPosts : subscription.getPosts()) {
-                    subscriptionsPosts.put(subscription, userPosts);
+                List<Post> userPosts = new ArrayList<>();
+                for (Post userPost : subscription.getPosts()) {
+                    userPosts.add(userPost);
                 }
+                subscriptionsPosts.put(subscription, userPosts);
             }
 
             model.addAttribute("posts", subscriptionsPosts);

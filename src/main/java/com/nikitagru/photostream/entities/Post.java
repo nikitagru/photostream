@@ -15,6 +15,8 @@ public class Post {
 
     private String imagename;
 
+    private String cutImageName;
+
     private String text;
 
 }
