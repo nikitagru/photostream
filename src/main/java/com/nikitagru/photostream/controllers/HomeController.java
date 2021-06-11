@@ -66,13 +66,25 @@ public class HomeController {
     }
 
     @GetMapping("/userprofile/{id}")
-    public String currentUserprofile(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
+    public String currentUserprofile(@PathVariable("id") Long id, Model model, Principal principal) {
+        User userToShow = userService.findById(id);
 
-        if (user != null) {
-            initializeUser(model, user);
+        if (userToShow != null) {
+            if (userToShow.getUsername().equals(principal.getName())) {
+                return "redirect:/userprofile";
+            }
+            initializeUser(model, userToShow);
+            User currentUser = userService.findByUsername(principal.getName());
+
+            if (currentUser.getSubscriptions().contains(userToShow)) {
+                model.addAttribute("isSubscribe", true);
+            } else {
+                model.addAttribute("isSubscribe", false);
+            }
+
             return "userprofile";
         }
+
 
         return "home";
     }
