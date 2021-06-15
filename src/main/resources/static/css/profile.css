@@ -1,11 +1,18 @@
 @font-face {
-    font-family: "Proximanova-Regular";
-    src: url("../fonts/OpenSans-Regular-webfont.eot") format("eot"),
-           url("../fonts/OpenSans-Regular-webfont.woff") format("woff"),
-           url("../fonts/OpenSans-Regular-webfont.tff") format("ttf");
-   }
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/open-sans-v20-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/open-sans-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/open-sans-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/open-sans-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/open-sans-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/open-sans-v20-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+
 body {
-    font-family: "Proximanova-Regular", sans-serif;
+    font-family: 'OpenSans', sans-serif;
     font-size: 16px;
     background-color: #f7f7f7;
 }
@@ -39,6 +46,11 @@ body {
     width: auto;
     object-fit: cover;
 }
+
+.post-image__modal {
+    max-width: 100%;
+}
+
 
 .user-information {
     display: flex;

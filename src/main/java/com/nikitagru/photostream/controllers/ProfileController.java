@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.awt.datatransfer.FlavorEvent;
 import java.io.File;
@@ -61,8 +63,8 @@ public class ProfileController {
 
     @PostMapping("/upload")
     public String uploadPost(@RequestParam("photo") MultipartFile file,
-                             @RequestParam("postText") String postText,
-                             Principal principal) {
+                                   @RequestParam("postText") String postText,
+                                   Principal principal) {
         if (file != null) {
             File uploadDir = new File(uploadPath);
 

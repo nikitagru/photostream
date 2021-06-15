@@ -22,6 +22,9 @@
             </div>
             <div th:if="${posts != null}">
                 <ul class="navbar-nav me-2 d-flex flex-row">
+                    <li class="nav-item me-2">
+                        <a class="nav-link" th:href="@{/userprofile}">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/logout}">Logout</a>
                     </li>
@@ -30,7 +33,14 @@
         </nav>
         <!-- /Header -->
 
-        <p th:text="'Hello, authenticated user ' + ${name} + '!'" />
+        <div th:if="${posts == null}" class="d-flex justify-content-center mt-3">
+            <h2>You can register now!</h2>
+        </div>
+
+        <div th:if="${postsCount == 0}" class="d-flex justify-content-center mt-3">
+            <h2>You don't have any posts from your subscriptions. Come later or follow new users!</h2>
+        </div>
+
         <!-- Posts -->
         <div th:unless="${postsCount == '0'}" th:if="${posts != null}">
             <div th:each="key: ${posts.keySet()}" id="post">
@@ -38,7 +48,7 @@
                     <div><a th:href="@{/userprofile/{id}(id=${key.id})}" class="user-link">
                         <p th:text="${key.username}"/>
                     </a></div>
-                    <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename})}" class="post-image"/>
+                    <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename}, imagePath=${imagePath})}" class="post-image"/>
                     <p th:text="${value.text}" class="post-text"/>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#modalPost' + ${value.cutImageName}">
                         Fullscreen
