@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div>
-                                        <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename})}" class="post-image__modal"/>
+                                        <img th:src="@{/img/usersImage/{imagename}(imagename=${value.imagename}, imagepath=${imagePath})}" class="post-image__modal"/>
                                         <p th:text="${value.text}" class="post-text"/>
                                     </div>
                                 </div>

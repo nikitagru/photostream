@@ -4,6 +4,7 @@ import com.nikitagru.photostream.entities.Post;
 import com.nikitagru.photostream.entities.User;
 import com.nikitagru.photostream.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +20,14 @@ import java.util.List;
 public class HomeController {
     private UserService userService;
 
+    @Value("${upload.path}")
+    private String imagePath;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
 
 
     @GetMapping("/")
@@ -42,6 +47,7 @@ public class HomeController {
 
             model.addAttribute("posts", subscriptionsPosts);
             model.addAttribute("postsCount", subscriptionsPosts.size());
+            model.addAttribute("imagePath", imagePath);
         }
         return "home";
     }
@@ -51,6 +57,8 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
 
         initializeUser(model, user);
+        model.addAttribute("isSubscribe", null);
+
 
         return "userprofile";
     }
@@ -63,6 +71,7 @@ public class HomeController {
         model.addAttribute("posts", user.getPosts());
         model.addAttribute("subscribers", subscribers);
         model.addAttribute("subscriptions", subscriptions);
+        model.addAttribute("imagePath", imagePath);
     }
 
     @GetMapping("/userprofile/{id}")

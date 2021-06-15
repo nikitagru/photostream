@@ -11,7 +11,7 @@
   <div th:object="${user}" class="user">
     <div class="user-information">
       <div class="user-avatar">
-        <img th:src="@{/img/usersImage/{profileImage}(profileImage=${user.profileImageName})}" class="user-image"/>
+        <img th:src="@{/img/usersImage/{profileImage}(profileImage=${user.profileImageName}, imagepath=${imagePath})}" class="user-image"/>
       </div>
       <div class="user-subs">
         <div>
@@ -23,18 +23,48 @@
         <div>
           <p th:text="${subscriptions} + ' subscriptions'" class="user-about"/>
         </div>
-        <div th:if="${isSubscribe}">
-          <a class="btn btn-secondary" th:href="@{/unsubscribe/{userId}(userId=${user.id})}">Unsubscribe</a>
+        <div th:if="${isSubscribe != null}">
+          <div th:if="${isSubscribe}">
+            <a class="btn btn-secondary" th:href="@{/unsubscribe/{userId}(userId=${user.id})}">Unsubscribe</a>
+          </div>
+          <div th:if="${!isSubscribe}">
+            <a class="btn btn-secondary" th:href="@{/subscribe/{userId}(userId=${user.id})}">Subscribe</a>
+          </div>
         </div>
-        <div th:if="${!isSubscribe}">
-          <a class="btn btn-secondary" th:href="@{/subscribe/{userId}(userId=${user.id})}">Subscribe</a>
+
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload">
+          Create post
+        </button>
+
+        <!-- Upload modal window -->
+        <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+                  <input type="text" name="postText" class="form-control" placeholder="Enter description" />
+                  <input type="file" name="photo" class="form-control mt-2">
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-secondary mt-2">Post</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+
+
       </div>
     </div>
     <hr>
     <div class="user-posts">
       <div th:each="post: ${posts}" class="post" id="post">
-        <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename})}" class="post-image" id="post-image"/>
+        <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename}, imagepath=${imagePath})}" class="post-image" id="post-image"/>
         <p th:text="${post.text}" class="post-text"/>
       </div>
     </div>
