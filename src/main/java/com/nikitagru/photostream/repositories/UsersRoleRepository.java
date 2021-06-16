@@ -10,8 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
+/***
+ * Repository for user's roles
+ */
 @Repository
 public interface UsersRoleRepository extends JpaRepository<UserRole, Long> {
+    /***
+     * Give to user role
+     * @param id current user's id
+     */
     @Query(value = "INSERT INTO users_roles (user_id, role_id) VALUES (:#{#id}, 1)", nativeQuery = true)
     @Modifying
     @Transactional

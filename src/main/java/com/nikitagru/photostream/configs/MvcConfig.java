@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/***
+ * MVC configure class
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer{
     @Override

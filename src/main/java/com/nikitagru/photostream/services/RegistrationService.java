@@ -4,6 +4,9 @@ import com.nikitagru.photostream.repositories.UsersRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/***
+ * Service for registration
+ */
 @Service
 public class RegistrationService {
 
@@ -14,6 +17,10 @@ public class RegistrationService {
         this.usersRoleRepository = usersRoleRepository;
     }
 
+    /***
+     * Saves new user with role
+     * @param userId current user's id
+     */
     public void saveAndSetRoleUser(long userId) {
         usersRoleRepository.saveNewUser(userId);
     }

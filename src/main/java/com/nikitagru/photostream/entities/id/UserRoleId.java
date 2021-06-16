@@ -2,6 +2,9 @@ package com.nikitagru.photostream.entities.id;
 
 import java.io.Serializable;
 
+/***
+ * Ids for table "users_roles"
+ */
 public class UserRoleId implements Serializable {
     private long user_id;
     private long role_id;

@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.UUID;
 
+/***
+ * Profile controller
+ */
 @Controller
 public class ProfileController {
     private UserService userService;
@@ -47,6 +50,12 @@ public class ProfileController {
         this.userService = userService;
     }
 
+    /***
+     * Handles subscribe request
+     * @param id user's id, which we wont to subscribe
+     * @param principal current user
+     * @return user profile page
+     */
     @GetMapping("/subscribe/{id}")
     public String subscribe(@PathVariable("id") Long id, Principal principal) {
         User currentUser = userService.findByUsername(principal.getName());
@@ -54,6 +63,12 @@ public class ProfileController {
         return "redirect:/userprofile/" + id;
     }
 
+    /***
+     * Handles unsubscribe request
+     * @param id user's id, which we wont to unsubscribe
+     * @param principal current user
+     * @return user profile page
+     */
     @GetMapping("/unsubscribe/{id}")
     public String unSubscribe(@PathVariable("id") Long id, Principal principal) {
         User currentUser = userService.findByUsername(principal.getName());
@@ -61,6 +76,13 @@ public class ProfileController {
         return "redirect:/userprofile/" + id;
     }
 
+    /***
+     * Handles post uploading
+     * @param file photo
+     * @param postText text of the post
+     * @param principal current user
+     * @return current user's profile page
+     */
     @PostMapping("/upload")
     public String uploadPost(@RequestParam("photo") MultipartFile file,
                                    @RequestParam("postText") String postText,
@@ -96,6 +118,12 @@ public class ProfileController {
         return "redirect:/userprofile";
     }
 
+    /***
+     * Handles avatar changing
+     * @param file photo
+     * @param principal current user
+     * @return current user's profile page
+     */
     @PostMapping("/changeavatar")
     public String changeAvatar(@RequestParam("photo") MultipartFile file, Principal principal) {
         User currentUser = userService.findByUsername(principal.getName());

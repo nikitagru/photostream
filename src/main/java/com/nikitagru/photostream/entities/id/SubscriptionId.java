@@ -2,6 +2,9 @@ package com.nikitagru.photostream.entities.id;
 
 import java.io.Serializable;
 
+/***
+ * Ids for table "subscribers"
+ */
 public class SubscriptionId implements Serializable {
     private Long user_id;
     private Long subscriber_id;

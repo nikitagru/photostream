@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/***
+ * Service for user
+ */
 @Service
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
@@ -58,6 +61,10 @@ public class UserService implements UserDetailsService {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 
+    /***
+     * Registers new user
+     * @param user current user
+     */
     public void registerNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -65,6 +72,10 @@ public class UserService implements UserDetailsService {
         registrationService.saveAndSetRoleUser(createdUser.getId());
     }
 
+    /***
+     * Updates current user's data
+     * @param user current user
+     */
     public void updateUser(User user) {
         userRepository.save(user);
     }

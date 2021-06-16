@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+/***
+ * Authentication controller
+ */
 @Controller
 public class AuthController {
     private UserService userService;

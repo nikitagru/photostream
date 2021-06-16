@@ -16,6 +16,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+/***
+ * Home page controller
+ */
 @Controller
 public class HomeController {
     private UserService userService;
@@ -28,8 +31,12 @@ public class HomeController {
         this.userService = userService;
     }
 
-
-
+    /***
+     * Generate home page
+     * @param principal current user
+     * @param model MVC model
+     * @return home page
+     */
     @GetMapping("/")
     public String homePage(Principal principal, Model model) {
         if (principal == null) {
@@ -52,6 +59,12 @@ public class HomeController {
         return "home";
     }
 
+    /***
+     * Generate current user profile page
+     * @param model MVC model
+     * @param principal current user
+     * @return current user's page
+     */
     @GetMapping("/userprofile")
     public String userProfile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -63,6 +76,11 @@ public class HomeController {
         return "userprofile";
     }
 
+    /***
+     * Initialize basic variables for profile page
+     * @param model MVC model
+     * @param user user, which page will be generate
+     */
     private void initializeUser(Model model, User user) {
         int subscribers = user.getSubscribers().size();
         int subscriptions = user.getSubscriptions().size();
@@ -74,6 +92,13 @@ public class HomeController {
         model.addAttribute("imagePath", imagePath);
     }
 
+    /***
+     * Generate all but current user's page
+     * @param id user id
+     * @param model MVC model
+     * @param principal current user
+     * @return
+     */
     @GetMapping("/userprofile/{id}")
     public String currentUserprofile(@PathVariable("id") Long id, Model model, Principal principal) {
         User userToShow = userService.findById(id);

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+/***
+ * Subscriptions table
+ */
 @Entity
 @Data
 @Table(name = "subscribers")

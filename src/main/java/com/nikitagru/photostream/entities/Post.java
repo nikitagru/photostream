@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/***
+ * Post entity
+ */
 @Entity
 @Data
 @Table(name = "posts")
@@ -15,7 +18,7 @@ public class Post {
 
     private String imagename;
 
-    private String cutImageName;
+    private String cutImageName;    // name before first point (needs for modal windows generating)
 
     private String text;
 
