@@ -20,7 +20,6 @@ body {
 .user {
     display: flex;
     flex-direction: column;
-    width: 1225px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;

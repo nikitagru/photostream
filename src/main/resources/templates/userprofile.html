@@ -8,103 +8,118 @@
 
 </head>
 <body>
-  <div th:object="${user}" class="user">
-    <div class="user-information">
-      <div class="user-avatar">
-        <img th:src="@{/img/usersImage/{profileImage}(profileImage=${user.profileImageName}, imagePath=${imagePath})}" class="user-image"/>
-      </div>
-      <div class="user-subs">
-        <div>
-          <p th:text="*{username}" class="user-about"/>
+  <div class="container">
+
+    <nav class="navbar navbar-light justify-content-end" style="background-color: #e3f2fd;">
+        <ul class="navbar-nav me-2 d-flex flex-row">
+          <li class="nav-item me-3">
+            <a class="nav-link" th:href="@{/}">Home</a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link" th:href="@{/userprofile}">Profile</a>
+          </li>
+        </ul>
+    </nav>
+
+
+    <div th:object="${user}" class="user">
+      <div class="user-information">
+        <div class="user-avatar">
+          <img th:src="@{/img/usersImage/{profileImage}(profileImage=${user.profileImageName}, imagePath=${imagePath})}" class="user-image"/>
         </div>
-        <div>
-          <p th:text="${subscribers} + ' followers'" class="user-about"/>
-        </div>
-        <div>
-          <p th:text="${subscriptions} + ' subscriptions'" class="user-about"/>
-        </div>
-        <div th:if="${isSubscribe != null}">
-          <div th:if="${isSubscribe}">
-            <a class="btn btn-primary ms-2" th:href="@{/unsubscribe/{userId}(userId=${user.id})}">Unsubscribe</a>
+        <div class="user-subs">
+          <div>
+            <p th:text="*{username}" class="user-about"/>
           </div>
-          <div th:if="${!isSubscribe}">
-            <a class="btn btn-primary ms-2" th:href="@{/subscribe/{userId}(userId=${user.id})}">Subscribe</a>
+          <div>
+            <p th:text="${subscribers} + ' followers'" class="user-about"/>
           </div>
-        </div>
+          <div>
+            <p th:text="${subscriptions} + ' subscriptions'" class="user-about"/>
+          </div>
+          <div th:if="${isSubscribe != null}">
+            <div th:if="${isSubscribe}">
+              <a class="btn btn-primary ms-2" th:href="@{/unsubscribe/{userId}(userId=${user.id})}">Unsubscribe</a>
+            </div>
+            <div th:if="${!isSubscribe}">
+              <a class="btn btn-primary ms-2" th:href="@{/subscribe/{userId}(userId=${user.id})}">Subscribe</a>
+            </div>
+          </div>
 
 
-        <div th:if="${isSubscribe == null}">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload">
-            Create post
-          </button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#avatar">
-            Change avatar
-          </button>
-        </div>
+          <div th:if="${isSubscribe == null}">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload">
+              Create post
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#avatar">
+              Change avatar
+            </button>
+          </div>
 
-        <!-- Upload modal window -->
-        <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form method="post" enctype="multipart/form-data" th:action="@{/upload}">
-                  <input type="text" name="postText" class="form-control" placeholder="Enter description" />
-                  <input type="file" name="photo" class="form-control mt-2">
-                  <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-secondary mt-2">Post</button>
-                  </div>
-                </form>
+          <!-- Upload modal window -->
+          <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+                    <input type="text" name="postText" class="form-control" placeholder="Enter description" />
+                    <input type="file" name="photo" class="form-control mt-2">
+                    <div class="d-flex justify-content-end">
+                      <button type="submit" class="btn btn-secondary mt-2">Post</button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Changing avatar -->
-        <div class="modal fade" id="avatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form method="post" enctype="multipart/form-data" th:action="@{/changeavatar}">
-                  <p th:text="'Upload your avatar photo below'" />
-                  <input type="file" name="photo" class="form-control mt-2">
-                  <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-secondary mt-2">Post</button>
-                  </div>
-                </form>
+          <!-- Changing avatar -->
+          <div class="modal fade" id="avatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" enctype="multipart/form-data" th:action="@{/changeavatar}">
+                    <p th:text="'Upload your avatar photo below'" />
+                    <input type="file" name="photo" class="form-control mt-2">
+                    <div class="d-flex justify-content-end">
+                      <button type="submit" class="btn btn-secondary mt-2">Post</button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
-
       </div>
-    </div>
 
-    <hr>
+      <hr>
 
 
-    <div class="user-posts">
-      <div th:each="post: ${posts}" class="post" id="post">
-        <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename}, imagePath=${imagePath})}" class="post-image" id="post-image"/>
-        <p th:text="${post.text}" class="post-text"/>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#modalPost' + ${post.cutImageName}">
-          Fullscreen
-        </button>
-        <div class="modal fade" th:id="'modalPost' + ${post.cutImageName}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div>
-                  <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename}, imagePath=${imagePath})}" class="post-image__modal"/>
-                  <p th:text="${post.text}" class="post-text"/>
+      <div class="user-posts">
+        <div th:each="post: ${posts}" class="post" id="post">
+          <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename}, imagePath=${imagePath})}" class="post-image" id="post-image"/>
+          <p th:text="${post.text}" class="post-text"/>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#modalPost' + ${post.cutImageName}">
+            Fullscreen
+          </button>
+          <div class="modal fade" th:id="'modalPost' + ${post.cutImageName}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <img th:src="@{/img/usersImage/{imagename}(imagename=${post.imagename}, imagePath=${imagePath})}" class="post-image__modal"/>
+                    <p th:text="${post.text}" class="post-text"/>
+                  </div>
                 </div>
               </div>
             </div>

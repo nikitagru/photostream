@@ -2,18 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Login page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 </head>
 <body>
-<h1>Login page</h1>
-<p th:if="${loginError}" class="error">Wrong user or password</p>
-<form th:action="@{/login}" method="post">
-  <label for="username">Username</label>:
-  <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
 
-  <label for="password">Password</label>:
-  <input type="password" id="password" name="password" /> <br />
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <h1 class="text-center">Login</h1>
+        <p th:if="${loginError}" class="error">Wrong user or password</p>
+        <form th:action="@{/login}" method="post">
+          <p>Username: <input type="text" id="username" name="username" autofocus="autofocus" /></p>
+          <p>Password: <input type="password" id="password" name="password" /></p>
+          <input type="submit" class="btn btn-secondary mt-2" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <input type="submit" value="Log in" />
-</form>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
