@@ -65,4 +65,8 @@ public class UserService implements UserDetailsService {
         registrationService.saveAndSetRoleUser(createdUser.getId());
     }
 
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
 }

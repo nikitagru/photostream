@@ -95,4 +95,32 @@ public class ProfileController {
 
         return "redirect:/userprofile";
     }
+
+    @PostMapping("/changeavatar")
+    public String changeAvatar(@RequestParam("photo") MultipartFile file, Principal principal) {
+        User currentUser = userService.findByUsername(principal.getName());
+
+        if (file != null) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFileName = UUID.randomUUID().toString();
+            String resultFileName = uuidFileName + "_" + file.getOriginalFilename();
+
+            try {
+                file.transferTo(new File(uploadPath + resultFileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            currentUser.setProfileImageName(resultFileName);
+        }
+
+        userService.updateUser(currentUser);
+
+        return "redirect:/userprofile";
+    }
 }
